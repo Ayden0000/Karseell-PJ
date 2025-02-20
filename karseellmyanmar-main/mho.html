@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>E-commerce Page</title>
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="bootstrap/css/bootstrap-icons.min.css" rel="stylesheet" />
+    <style>
+      .container {
+        padding-top: 3rem !important;
+      }
+      /* General Header Styling */
+      header {
+        background-color: #ffffff; /* Clean, minimalist white */
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Smooth shadow for depth */
+        transition: all 0.3s ease-in-out; /* Animation for smooth interactions */
+        z-index: 1000;
+      }
+
+      /* Logo and Brand Name */
+      header .fs-4 {
+        font-family: "San Francisco", -apple-system, BlinkMacSystemFont,
+          "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans",
+          "Helvetica Neue", sans-serif;
+        letter-spacing: 0.5px;
+      }
+
+      /* Navigation Links */
+      header nav a {
+        font-size: 1rem; /* Modern, legible font size */
+        font-weight: 500;
+        color: #333333; /* Neutral dark color */
+        padding: 5px 10px;
+        transition: color 0.3s ease, transform 0.3s ease; /* Smooth color & hover animations */
+      }
+
+      header nav a.link-hover:hover {
+        color: #007aff; /* Apple-like subtle blue on hover */
+        transform: translateY(-2px); /* Hover movement */
+        text-decoration: none;
+      }
+
+      /* Dropdown Menu */
+      header .dropdown:hover .dropdown-menu {
+        display: block; /* Show the menu on hover */
+        animation: fadeIn 0.3s ease-in-out; /* Smooth appearance */
+      }
+
+      header .dropdown-menu {
+        min-width: 200px;
+        background-color: #ffffff; /* Clean white */
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+        border-radius: 10px; /* Rounded corners */
+        display: none; /* Hide menu by default */
+        padding: 10px 0; /* Clean spacing */
+      }
+
+      header .dropdown-item {
+        padding: 10px 15px;
+        transition: background-color 0.3s ease, transform 0.3s ease; /* Interactive hover effect */
+      }
+
+      header .dropdown-item:hover {
+        background-color: #f2f2f2; /* Subtle hover effect for dropdown items */
+        transform: translateX(5px); /* Slight hover animation */
+      }
+
+      /* Dropdown indicator styling */
+      .bi-chevron-down {
+        font-size: 0.8rem; /* Adjust size of the caret */
+        transition: transform 0.3s ease; /* Smooth animation */
+      }
+
+      /* Rotate caret when hovering over dropdown */
+      .dropdown:hover .bi-chevron-down {
+        transform: rotate(180deg); /* Rotate the caret */
+      }
+
+      /* Dropdown Menu Animations */
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(-10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* Mobile-Friendly Responsiveness */
+      @media (max-width: 768px) {
+        header nav {
+          flex-direction: column; /* Stack navigation links on smaller screens */
+          gap: 10px;
+        }
+
+        header nav a {
+          font-size: 0.9rem; /* Adjust font size for smaller devices */
+        }
+      }
+      footer {
+        background-color: #f8f9fa;
+        text-align: center;
+        padding: 20px;
+        /**margin-top: 20px;*/
+      }
+      .product-image-main {
+        max-width: 100%;
+        height: auto;
+      }
+      .product-price {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #f36f6f;
+      }
+      .product-price .old-price {
+        text-decoration: line-through;
+        color: #6c757d;
+      }
+      .product-title {
+        font-size: 2rem;
+        font-weight: bold;
+        margin-bottom: 10px;
+      }
+      .rating {
+        color: #f1c40f;
+      }
+      .btn-buy {
+        background-color: #f36f6f;
+        color: white;
+        width: 100%;
+        padding: 12px;
+      }
+      .btn-buy:hover {
+        background-color: #c13e3e;
+        text-decoration: none;
+      }
+      .product-info {
+        font-size: 1.2rem;
+        margin-top: 20px;
+      }
+      .product-image {
+        width: 67%;
+        height: auto;
+        display: block;
+        margin: 0 auto;
+        padding-bottom: 20px;
+      }
+
+      .product-image-last {
+        width: 67%;
+        height: auto;
+        display: block;
+        margin: 0 auto;
+      }
+
+      .ingredients {
+        width: 85%; /* Set the width to 80% of the parent container */
+        margin: 0 auto; /* Center-align the div */
+        font-family: Arial, sans-serif;
+        font-size: 16px;
+        line-height: 1.6;
+        color: #333;
+        text-align: left; /* Optional: ensures text alignment is left */
+        padding-bottom: 20px;
+      }
+
+      .ingredients h2 {
+        font-size: 20px;
+        margin-bottom: 10px;
+        text-align: left; /* Center-align the header */
+      }
+
+      .ingredients p {
+        margin: 0;
+      }
+      .video-container {
+        width: 85%; /* Set width to 85% of the parent container */
+        margin: 20px auto; /* Center-align the div and add some spacing above and below */
+        text-align: center; /* Optional: centers the content inside */
+      }
+    </style>
+  </head>
+
+  <body>
+    <header class="fixed-top py-3 px-4 shadow bg-white">
+      <div
+        class="container-fluid d-flex justify-content-between align-items-center"
+      >
+        <!-- Logo -->
+        <div class="d-flex align-items-center">
+          <img
+            src="images/cropped-logo-1.png"
+            alt="E-Shop Logo"
+            style="height: 50px; margin-right: 10px"
+          />
+          <span class="fs-4 fw-bold text-dark"></span>
+        </div>
+
+        <!-- Navigation -->
+        <nav class="d-flex align-items-center">
+          <a
+            href="index.html"
+            class="me-4 text-dark fw-medium text-decoration-none link-hover"
+            >Home</a
+          >
+          <a
+            href="#"
+            class="me-4 text-dark fw-medium text-decoration-none link-hover"
+            >Shop</a
+          >
+
+          <!-- Dropdown Menu -->
+          <div class="dropdown position-relative">
+            <a
+              href="#"
+              class="text-dark fw-medium text-decoration-none link-hover"
+            >
+              Products
+              <i class="bi bi-chevron-down ms-1"></i>
+              <!-- Dropdown indicator -->
+            </a>
+            <ul
+              class="dropdown-menu shadow-lg border-0 rounded-3 position-absolute"
+              aria-labelledby="productsDropdown"
+            >
+              <li><a class="dropdown-item text-dark" href="#">Hair Mask</a></li>
+              <li>
+                <a class="dropdown-item text-dark" href="#">Conditioner</a>
+              </li>
+              <li><a class="dropdown-item text-dark" href="#">Shampoo</a></li>
+              <li><a class="dropdown-item text-dark" href="#">Hair Oil</a></li>
+              <li>
+                <a class="dropdown-item text-dark" href="#">Hair Care Set</a>
+              </li>
+            </ul>
+          </div>
+
+          <a
+            href="#"
+            class="ms-4 text-dark fw-medium text-decoration-none link-hover"
+            >Contact</a
+          >
+        </nav>
+      </div>
+    </header>
+
+    <div class="container mt-5">
+      <!-- Breadcrumb Navigation -->
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="#">首页</a></li>
+          <li class="breadcrumb-item"><a href="#">Karsell</a></li>
+          <li class="breadcrumb-item active" aria-current="page">
+            Karseell Collagen Hair Treatment Bag
+          </li>
+        </ol>
+      </nav>
+
+      <div class="row">
+        <!-- Product Image -->
+        <div class="col-md-6 mb-4">
+          <img
+            src="images/Karseell-Collagen-Hair-Treatment-500ml-2-1.jpg"
+            alt="Product Image"
+            class="product-image-main"
+          />
+        </div>
+        <!-- Product Details -->
+        <div class="col-md-6">
+          <div class="product-title">Karseell Collagen Hair Treatment Bag</div>
+          <div class="rating">
+            <i class="bi bi-star-fill"></i>
+            <i class="bi bi-star-fill"></i>
+            <i class="bi bi-star-fill"></i>
+            <i class="bi bi-star-fill"></i>
+            <i class="bi bi-star-half"></i>
+            <span>(625 customer reviews)</span>
+          </div>
+          <div class="product-price">
+            <span class="old-price">$23.50</span> $19.98
+          </div>
+          <div class="product-info">
+            <label for="volume" class="form-label">Volume</label>
+            <select class="form-select" id="volume">
+              <option value="100ml">100ML</option>
+              <option value="500ml">500ML</option>
+            </select>
+          </div>
+          <div class="d-flex align-items-center justify-content-between mt-4">
+            <button class="btn btn-buy">Add to Cart</button>
+          </div>
+          <div class="mt-3">
+            <button class="btn btn-light w-100">Buy with PayPal</button>
+          </div>
+          <div class="mt-2">
+            <button class="btn btn-outline-dark w-100">
+              Buy with Google Pay
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ingredients">
+      <h2>Ingredients</h2>
+      <p>
+        Aqua (Water), Cetearyl Alcohol, Cocos Nucifera (Coconut) Oil,
+        Stearamidopropyl Dimethylamine, Argania Spinosa Kernel Oil, Persea
+        Gratissima (Avocado) Oil, Butyrospermum Parkii (Shea Butter), Hydrolyzed
+        Wheat Protein, Achillea Millefolium Extract, Arnica Montana Flower
+        Extract, Artemisia Absinthium Extract, Calendula Officinalis Flower
+        Extract, Chamomilla Recutita (Matricaria) Flower/Leaf Extract, Gentiana
+        Lutea Root Extract, Sunflower Seed Oil Cetyl Esters, Hydrolyzed Soy
+        Protein, Lecithin, Moringa Pterygosperma Seed Extract,
+        Cyclopentasiloxane, Polyglutamic Acid, Ceteardimonium Chloride,
+        Phenoxyethanol, Ceteareth-20, Propylene Glycol, Tocopheryl Acetate,
+        Parfum.
+      </p>
+    </div>
+
+    <div class="video-container">
+        <iframe 
+            width="79%" 
+            height="500px" 
+            src="https://www.youtube.com/embed/20Sf-YdxPK4" 
+            title="YouTube video player" 
+            frameborder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+            allowfullscreen>
+        </iframe>
+    </div>    
+
+    <div class="col-12">
+      <!-- Full Width and Centered Image -->
+      <img
+        src="images/详情页-1-3-1536x640.jpg"
+        alt="Perfect for All Hair Types"
+        class="product-image"
+      />
+    </div>
+
+    <div class="col-12">
+      <!-- Full Width and Centered Image -->
+      <img
+        src="images/详情页-2-3-1536x640.jpg"
+        alt="Perfect for All Hair Types"
+        class="product-image"
+      />
+    </div>
+
+    <div class="col-12">
+        <!-- Full Width and Centered Image -->
+        <img
+          src="images/详情页-3-3-1536x640.jpg"
+          alt="Perfect for All Hair Types"
+          class="product-image"
+        />
+    </div>
+
+    <div class="col-12">
+        <!-- Full Width and Centered Image -->
+        <img
+          src="images/Karseell-Collagen-Hair-Treatment-3.jpg"
+          alt="Perfect for All Hair Types"
+          class="product-image"
+        />
+    </div>
+
+    <div class="col-12">
+        <!-- Full Width and Centered Image -->
+        <img
+          src="images/Karseell-Collagen-Hair-Treatment-1.jpg"
+          alt="Perfect for All Hair Types"
+          class="product-image"
+        />
+    </div>
+
+    <div class="col-12">
+      <!-- Full Width and Centered Image -->
+      <img
+        src="images/Karseell-Collagen-Hair-Treatment-2.jpg"
+        alt="Perfect for All Hair Types"
+        class="product-image-last"
+      />
+    </div>
+
+    <section style="padding: 20px 0; background-color: #fff">
+      <div class="container text-center">
+        <div class="row justify-content-center">
+          <!-- Item 1 -->
+          <div class="col-6 col-md-3">
+            <div>
+              <i class="bi bi-truck" style="font-size: 2rem; color: black"></i>
+            </div>
+            <p style="margin-top: 10px; font-size: 1rem; font-weight: bold">
+              Worldwide delivery
+            </p>
+          </div>
+          <!-- Item 2 -->
+          <div class="col-6 col-md-3">
+            <div>
+              <i
+                class="bi bi-emoji-smile"
+                style="font-size: 2rem; color: black"
+              ></i>
+            </div>
+            <p style="margin-top: 10px; font-size: 1rem; font-weight: bold">
+              Satisfaction guaranteed
+            </p>
+          </div>
+          <!-- Item 3 -->
+          <div class="col-6 col-md-3">
+            <div>
+              <i
+                class="bi bi-headset"
+                style="font-size: 2rem; color: black"
+              ></i>
+            </div>
+            <p style="margin-top: 10px; font-size: 1rem; font-weight: bold">
+              After-sales support
+            </p>
+          </div>
+          <!-- Item 4 -->
+          <div class="col-6 col-md-3">
+            <div>
+              <i
+                class="bi bi-shield-check"
+                style="font-size: 2rem; color: black"
+              ></i>
+            </div>
+            <p style="margin-top: 10px; font-size: 1rem; font-weight: bold">
+              Payment Security
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-light text-dark pt-5">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-3 mb-4">
+            <img
+              src="images/cropped-logo-1.png"
+              alt="E-Shop Logo"
+              style="height: 50px"
+            />
+            <p class="mt-3 text-muted">
+              Explore the best products to enrich your lifestyle with
+              cutting-edge design and functionality.
+            </p>
+          </div>
+          <div class="col-md-3 mb-4">
+            <h5 class="fw-bold">Quick Links</h5>
+            <ul class="list-unstyled">
+              <li>
+                <a href="#" class="text-dark text-decoration-none">About Us</a>
+              </li>
+              <li>
+                <a href="#" class="text-dark text-decoration-none">Shop</a>
+              </li>
+              <li>
+                <a href="#" class="text-dark text-decoration-none">Contact</a>
+              </li>
+              <li>
+                <a href="#" class="text-dark text-decoration-none">FAQs</a>
+              </li>
+            </ul>
+          </div>
+          <div class="col-md-3 mb-4">
+            <h5 class="fw-bold">Customer Service</h5>
+            <ul class="list-unstyled">
+              <li>
+                <a href="#" class="text-dark text-decoration-none"
+                  >Shipping Policy</a
+                >
+              </li>
+              <li>
+                <a href="#" class="text-dark text-decoration-none"
+                  >Return Policy</a
+                >
+              </li>
+              <li>
+                <a href="#" class="text-dark text-decoration-none"
+                  >Privacy Policy</a
+                >
+              </li>
+              <li>
+                <a href="#" class="text-dark text-decoration-none"
+                  >Terms & Conditions</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div class="col-md-3 mb-4 text-center">
+            <h5 class="fw-bold">Follow Us</h5>
+            <p class="text-muted">Stay connected via social media:</p>
+            <div class="d-flex justify-content-center gap-3">
+              <!--
+            <a href="#" class="text-dark me-3"><i class="bi bi-facebook"></i></a>
+            <a href="#" class="text-dark me-3"><i class="bi bi-twitter"></i></a>
+            <a href="#" class="text-dark me-3"><i class="bi bi-instagram"></i></a>
+            <a href="#" class="text-dark me-3"><i class="bi bi-linkedin"></i></a>-->
+              <a href="#" class="text-muted"
+                ><i class="bi bi-facebook fs-4"></i
+              ></a>
+              <a href="#" class="text-muted"
+                ><i class="bi bi-instagram fs-4"></i
+              ></a>
+              <a href="#" class="text-muted"
+                ><i class="bi bi-twitter fs-4"></i
+              ></a>
+              <a href="#" class="text-muted"
+                ><i class="bi bi-youtube fs-4"></i
+              ></a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <hr />
+      <p class="text-center text-muted mb-0">
+        © 2024 Karseell Myanmar. All rights reserved.
+      </p>
+    </footer>
+
+    <script src="bootstrap/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>

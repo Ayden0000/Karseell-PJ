@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>E-commerce Page</title>
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="bootstrap/css/bootstrap-icons.min.css" rel="stylesheet" />
+    <style>
+      body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+      }
+
+      /* General Header Styling */
+      header {
+        background-color: #ffffff; /* Clean, minimalist white */
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Smooth shadow for depth */
+        transition: all 0.3s ease-in-out; /* Animation for smooth interactions */
+        z-index: 1000;
+      }
+
+      /* Logo and Brand Name */
+      header .fs-4 {
+        font-family: "San Francisco", -apple-system, BlinkMacSystemFont,
+          "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans",
+          "Helvetica Neue", sans-serif;
+        letter-spacing: 0.5px;
+      }
+
+      /* Navigation Links */
+      header nav a {
+        font-size: 1rem; /* Modern, legible font size */
+        font-weight: 500;
+        color: #333333; /* Neutral dark color */
+        padding: 5px 10px;
+        transition: color 0.3s ease, transform 0.3s ease; /* Smooth color & hover animations */
+      }
+
+      header nav a.link-hover:hover {
+        color: #007aff; /* Apple-like subtle blue on hover */
+        transform: translateY(-2px); /* Hover movement */
+        text-decoration: none;
+      }
+
+      /* Dropdown Menu */
+      header .dropdown:hover .dropdown-menu {
+        display: block; /* Show the menu on hover */
+        animation: fadeIn 0.3s ease-in-out; /* Smooth appearance */
+      }
+
+      header .dropdown-menu {
+        min-width: 200px;
+        background-color: #ffffff; /* Clean white */
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+        border-radius: 10px; /* Rounded corners */
+        display: none; /* Hide menu by default */
+        padding: 10px 0; /* Clean spacing */
+      }
+
+      header .dropdown-item {
+        padding: 10px 15px;
+        transition: background-color 0.3s ease, transform 0.3s ease; /* Interactive hover effect */
+      }
+
+      header .dropdown-item:hover {
+        background-color: #f2f2f2; /* Subtle hover effect for dropdown items */
+        transform: translateX(5px); /* Slight hover animation */
+      }
+
+      /* Dropdown indicator styling */
+      .bi-chevron-down {
+        font-size: 0.8rem; /* Adjust size of the caret */
+        transition: transform 0.3s ease; /* Smooth animation */
+      }
+
+      /* Rotate caret when hovering over dropdown */
+      .dropdown:hover .bi-chevron-down {
+        transform: rotate(180deg); /* Rotate the caret */
+      }
+
+      /* Dropdown Menu Animations */
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(-10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* Mobile-Friendly Responsiveness */
+      @media (max-width: 768px) {
+        header nav {
+          flex-direction: column; /* Stack navigation links on smaller screens */
+          gap: 10px;
+        }
+
+        header nav a {
+          font-size: 0.9rem; /* Adjust font size for smaller devices */
+        }
+      }
+
+      .main-product {
+        position: relative;
+        color: #fff;
+        height: 600px;
+        overflow: hidden;
+      }
+
+      .main-product img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 1;
+      }
+
+      .main-product .product-text {
+        position: relative;
+        z-index: 2;
+        max-width: 400px;
+        text-align: left;
+        padding: 20px;
+        background: rgba(0, 0, 0, 0.6);
+        border-radius: 8px;
+        display: inline-block;
+        top: 50%;
+        transform: translateY(-50%);
+        left: 5%;
+      }
+
+      .product-card {
+        height: 600px;
+        text-align: center;
+        /*padding: 10px;*/
+        border: 0.5px solid #ddd;
+        border-radius: 20px;
+        background-color: #fff;
+      }
+
+      .product-card img {
+        width: 100%;
+        height: z;
+        border-radius: 8px;
+        object-fit: cover;
+      }
+
+      .product-card h5 {
+        margin-top: 10px;
+      }
+      .product-card p {
+        max-height: 150px;
+      }
+      .product-card .btn {
+        margin-top: 10px;
+        margin-bottom: 20px;
+      }
+
+      footer {
+        background-color: #f8f9fa;
+        text-align: center;
+        padding: 20px;
+        /**margin-top: 20px;*/
+      }
+
+      .carousel-section {
+        width: 96%; /* or you can set a specific max-width for better control */
+        margin: 0 auto; /* This centers the section horizontally */
+        padding: 0;
+        margin-top: 0;
+        margin-bottom: 0;
+      }
+
+      .carousel-section h2 {
+        padding: 20px 0; /* Add spacing around the heading */
+      }
+
+      .carousel.slide {
+        width: 100%; /* Set the carousel to occupy full width */
+      }
+
+      .carousel-item img {
+        width: 360px;
+        height: 600px;
+        object-fit: cover; /* Ensure the images maintain aspect ratio and cover the area */
+      }
+
+      .container {
+        max-width: 97%;
+      }
+      
+
+      .products-row {
+        padding-top: 25px !important;
+      }
+
+      .btn-apple-theme {
+        display: inline-block;
+        background-color: #1c1c1e; /* Dark, elegant background */
+        color: #f5f5f7; /* Light text, similar to Apple's design */
+        font-size: 1rem;
+        font-weight: 500;
+        text-transform: uppercase; /* Consistent with Apple's design language */
+        padding: 0.6rem 1.5rem; /* Slightly more padding for elegance */
+        border: none; /* No border for minimalism */
+        border-radius: 8px; /* Soft rounded corners */
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+        transition: all 0.3s ease-in-out; /* Smooth hover transitions */
+        text-decoration: none; /* Remove underline for links */
+      }
+
+      .btn-apple-theme:hover {
+        background-color: #333336; /* Slightly lighter background on hover */
+        color: #ffffff; /* Slight color change for text */
+        transform: translateY(-2px); /* Lift effect */
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Enhanced shadow on hover */
+      }
+
+      .btn-apple-theme:active {
+        transform: translateY(0); /* Reset lift effect when clicked */
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Return to original shadow */
+      }
+    </style>
+  </head>
+
+  <body>
+    <header class="fixed-top py-3 px-4 shadow bg-white">
+      <div
+        class="container-fluid d-flex justify-content-between align-items-center"
+      >
+        <!-- Logo -->
+        <div class="d-flex align-items-center">
+          <img
+            src="images/cropped-logo-1.png"
+            alt="E-Shop Logo"
+            style="height: 50px; margin-right: 10px"
+          />
+          <span class="fs-4 fw-bold text-dark"></span>
+        </div>
+
+        <!-- Navigation -->
+        <nav class="d-flex align-items-center">
+          <a
+            href="index.html"
+            class="me-4 text-dark fw-medium text-decoration-none link-hover"
+            >Home</a
+          >
+          <a
+            href="#"
+            class="me-4 text-dark fw-medium text-decoration-none link-hover"
+            >Shop</a
+          >
+
+          <!-- Dropdown Menu -->
+          <div class="dropdown position-relative">
+            <a
+              href="#"
+              class="text-dark fw-medium text-decoration-none link-hover"
+            >
+              Products
+              <i class="bi bi-chevron-down ms-1"></i>
+              <!-- Dropdown indicator -->
+            </a>
+            <ul
+              class="dropdown-menu shadow-lg border-0 rounded-3 position-absolute"
+              aria-labelledby="productsDropdown"
+            >
+              <li><a class="dropdown-item text-dark" href="#">Hair Mask</a></li>
+              <li>
+                <a class="dropdown-item text-dark" href="#">Conditioner</a>
+              </li>
+              <li><a class="dropdown-item text-dark" href="#">Shampoo</a></li>
+              <li><a class="dropdown-item text-dark" href="#">Hair Oil</a></li>
+              <li>
+                <a class="dropdown-item text-dark" href="#">Hair Care Set</a>
+              </li>
+            </ul>
+          </div>
+
+          <a
+            href="contact.html"
+            class="ms-4 text-dark fw-medium text-decoration-none link-hover"
+            >Contact</a
+          >
+        </nav>
+      </div>
+    </header>
+
+
+    <main class="mt-5">
+      <!-- Main Product Section -->
+      <section class="main-product">
+        <img src="images/collagen-banner.jpg" alt="Main Product" />
+        <div class="product-text">
+          <h1 class="display-5 fw-bold">STAR PRODUCT HAIR MASK</h1>
+          <p class="lead">Delivering superior results for your hair</p>
+          <a href="cht.html" class="btn btn-light btn-lg">SHOP NOW</a>
+        </div>
+      </section>
+
+      <!-- Enhanced Products Section -->
+      <section class="products container my-5 text-center">
+        <h2 class="fw-bold" style="font-size: 2.5rem">Best Sellers</h2>
+        <p>Explore Our All Time Favorites</p>
+        <div class="row products-row g-5">
+          <!-- Product 1 -->
+          <div class="col-lg-3 col-md-6 col-sm-12">
+            <div class="product-card border-0 shadow-sm">
+              <img
+                src="images/Karseell-Hair-Treatment.jpg"
+                class="rounded mb-4"
+                alt="Karseell Hair Treatment"
+              />
+              <h5 class="fw-bold">Karseell Hair Treatment</h5>
+              <!-- <p class="text-muted mt-2">$199.99</p> -->
+              <p class="text-muted text-justify p-3" style="font-size: 0.9rem; overflow: hidden;">
+                ဆံသားများရှင်းမရပဲကျိုးကြေပျက်စီးနေတာကြောင့်စိတ်ညစ်နေရင် protein collagen keratin and argan oil ပါဝင်တဲ့hair mask လေးနဲ့ကျန်းမာသန်စွန်းပြီးပိုးသားကဲ့သို့နူးညံ့ပျော့ပျောင်းတဲ့ဆံကေသာလေးကိုပြန်လည်ရယူလိုက်ပါ              </p>
+              <div class="text-center">
+                <a href="cht.html" class="btn btn-apple-theme">Shop Now</a>
+              </div>
+            </div>
+          </div>
+          <!-- Product 2 -->
+          <div class="col-lg-3 col-md-6 col-sm-12">
+            <div class="product-card border-0 shadow-sm">
+              <img
+                src="images/Karseell-Essence-Oil.jpg"
+                class="rounded mb-4"
+                alt="Karseell Essence Oil"
+              />
+              <h5 class="fw-bold">Karseell Essence Oil</h5>
+              <!-- <p class="text-muted mt-2">$249.99</p> -->
+              <p class="text-muted text-justify p-3" style="font-size: 0.9rem; overflow: hidden;">
+                သဘာဝ argan သီးမှရရှိတဲ့အဆီအနှစ်ကိုအသုံးပြုထားတာကြောင့် ခြောက်သွေ့ပျက်စီးခြင်းနဲ့ ဆံပင်အဖျားနှစ်ခွဖြစ်ခြင်းတို့ကိုသက်သာစေကာ ဆံသားကိုသန်မာပီးတောက်ပြောင်စေနိုင်ပါတယ်
+              </p>
+              <div class="text-center">
+                <a href="mho.html" class="btn btn-apple-theme">Shop Now</a>
+              </div>
+            </div>
+          </div>
+          <!-- Product 3 -->
+          <div class="col-lg-3 col-md-6 col-sm-12">
+            <div class="product-card border-0 shadow-sm">
+              <img
+                src="images/Karseell-Shampoo.jpg"
+                class="rounded mb-4"
+                alt="Karseell Shampoo"
+              />
+              <h5 class="fw-bold">Karseell Shampoo</h5>
+              <!-- <p class="text-muted mt-2">$299.99</p> -->
+              <p class="text-muted text-justify p-3text-justify p-3" style="font-size: 0.9rem; overflow: hidden;">
+                Color ဆိုးထားသောဆံသားများကိုအရောင်ထိန်းသိမ်းပေးကာ Maca essence ပါဝင်တာကြောင့် ဦးရေပြားသွေးလည်ပတ်မှုကောင်းစေပီးဆံပင်ကိုလဲ၂ဆအရှည်မြန်စေပါတယ်
+              </p>
+              <div class="text-center">
+                <a href="#" class="btn btn-apple-theme">Shop Now</a>
+              </div>
+            </div>
+          </div>
+          <!-- Product 4 -->
+          <div class="col-lg-3 col-md-6 col-sm-12">
+            <div class="product-card border-0 shadow-sm">
+              <img
+                src="images/Karseell-Protein-Leave-in-Cream.jpg"
+                class="rounded mb-4"
+                alt="Karseell Protein Leave-in Cream"
+              />
+              <h5 class="fw-bold">Karseell Protein Leave-in Cream</h5>
+              <!-- <p class="text-muted mt-2">$229.99</p> -->
+              <p class="text-muted text-justify p-3" style="font-size: 0.9rem; overflow: hidden;">
+                ပျက်ဆီးနေပီးဆံသားတွေရှင်းရခက်နေတယ်ဆိုရင် အခြောက်ပေါင်းဆေးအဖြစ်အသုံးပြုလို့ရတဲ့ဆံသားရဲ့အတွင်းပိုင်းအထိအားဖြည့်ပေးပီးအစိုဓာတ်ကိုပေးစွမ်းနိင်တဲ့ ဆံသားအားဖြည့်cream
+              </p>
+              <div class="text-center">
+                <a href="#" class="btn btn-apple-theme">Shop Now</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Row 2 -->
+        <div class="row products-row g-5">
+          <!-- Product 5 -->
+          <div class="col-lg-3 col-md-6 col-sm-12">
+            <div class="product-card border-0 shadow-sm">
+              <img
+                src="images/Karseell-Argan-Collagen-Treatment.jpg"
+                class="rounded mb-4"
+                alt="Karseell Argan Collagen Treatment"
+              />
+              <h5 class="fw-bold">Karseell Argan Collagen Treatment </h5>
+              <!-- <p class="text-muted mt-2">$189.99</p> -->
+              <p class="text-muted text-justify p-3" style="font-size: 0.9rem; overflow: hidden;">
+                Biotin’s organic ပါဝင်ပီး arganoil /collagen တို့နဲ့ပေါင်းစပ်ထုတ်လုပ်ထားတာကြောင့် ဆံပင်ကိုအရင်းမှအဖျားထိသန်မာစေကာ ပျက်စီးမှုနည်းပီးဆံပင်ကိုတောက်ပြောင်စေနိုင်တာကြောင့် ဆံသားတောက်တောက်ပြောင်ပြောင်လေးပိုင်ဆိုင်နိုင်ပါတယ်
+              </p>
+              <div class="text-center">
+                <a href="#" class="btn btn-apple-theme">Shop Now</a>
+              </div>
+            </div>
+          </div>
+          <!-- Product 6 -->
+          <div class="col-lg-3 col-md-6 col-sm-12">
+            <div class="product-card border-0 shadow-sm">
+              <img
+                src="images/Karseell-Bnc-Argan-Collagen-Treatment.jpg"
+                class="rounded mb-4"
+                alt="Karseell Bnc Argan Collagen Treatment"
+              />
+              <h5 class="fw-bold">Karseell Bnc Argan Collagen Treatment</h5>
+              <!-- <p class="text-muted mt-2">$259.99</p> -->
+              <p class="text-muted text-justify p-3" style="font-size: 0.9rem; overflow: hidden;">
+                Argan oil,collagen,biotinနဲ့keratin တို့အချိုးအစားညီမျှစွာပါဝင်တာကြောင့်ဆံပင်ပျက်စီးခြောက်သွေ့မှုနဲ့ အဆီပြန်ခြင်းတို့ကိုကာကွယ်ပေးကာဆံသားကိုကျန်းမာတောက်ပြောင်စေပါတယ်
+              </p>
+              <div class="text-center">
+                <a href="#" class="btn btn-apple-theme">Shop Now</a>
+              </div>
+            </div>
+          </div>
+          <!-- Product 7 -->
+          <div class="col-lg-3 col-md-6 col-sm-12">
+            <div class="product-card border-0 shadow-sm">
+              <img
+                src="images/Karseell-Maca-Essence-Conditioner.jpg"
+                class="rounded mb-4"
+                alt="Karseell Maca Essence Conditioner"
+              />
+              <h5 class="fw-bold">Karseell Maca Essence Conditioner</h5>
+              <!-- <p class="text-muted mt-2">$199.99</p> -->
+              <p class="text-muted text-justify p-3" style="font-size: 0.9rem; overflow: hidden;">
+                ခြောက်သွေးပျက်စီးနေသောဆံသားများကိုရေဓာတ်ဖြည့်ပေးပြီးalo vera,chamomile,tea treeတို့ရဲ့အဆီအနှစ်များနဲ့ပေါင်းစပ်ထုတ်လုပ်ထားသောကြောင့်ဆံသားကိုအရင်းမှအဖျားထိနက်ရှိုင်းစွာတောက်ပြောင်စေနိုင်ပါသည်
+              </p>
+              <div class="text-center">
+                <a href="#" class="btn btn-apple-theme">Shop Now</a>
+              </div>
+            </div>
+          </div>
+                    <!-- Product 8 -->
+          <div class="col-lg-3 col-md-6 col-sm-12">
+            <div class="product-card border-0 shadow-sm">
+              <img
+                src="images/Karseell-Travel-Set.jpg"
+                class="rounded mb-4"
+                alt="Karseell Travel Set"
+              />
+              <h5 class="fw-bold">Karseell Travel Set</h5>
+              <!-- <p class="text-muted mt-2">$229.99</p> -->
+              <p class="text-muted text-justify p-3" style="font-size: 0.9rem; overflow: hidden;">
+                ခရီးသွားအိတ်ဆောင်အနေနဲ့သုံးချင်တယ် လက်ဆောင်လဲပေးချင်တယ် sample အနေနဲ့လဲtryကြည့်ချင်တယ်ဆိုရင်တော့ဘူးကြီးတွေရဲ့အာနိသင်နဲ့mini sizeလေးထုတ်ပေးထားတဲ့ hairtreatment 100ml,conditioner 70ml,shampoo70ml ပါတဲ့ သုံးမျိုးတွဲလေးကိုစမ်းသုံးကြည့်နော်
+              </p>
+              <div class="text-center">
+                <a href="#" class="btn btn-apple-theme">Shop Now</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!--Row 3-->
+        <div class="row products-row g-5">
+
+          <!-- Product 9 -->
+          <div class="col-lg-3 col-md-6 col-sm-12">
+            <div class="product-card border-0 shadow-sm">
+              <img
+                src="images/Karsee-Collagen-Hair-Mask.jpg"
+                class="rounded mb-4"
+                alt="Karseell Collagen Hair Mask"
+              />
+              <h5 class="fw-bold">Karseell Collagen Hair Mask</h5>
+              <!-- <p class="text-muted mt-2">$189.99</p> -->
+              <p class="text-muted text-justify p-3" style="font-size: 0.9rem; overflow: hidden;">
+                ဆံသားများရှင်းမရပဲကျိုးကြေပျက်စီးနေတာကြောင့်စိတ်ညစ်နေရင် protein collagen & argan အဆီအနှစ်တို့ပါဝင်ထားတဲ့hair maskလေးနဲ့ ကျန်းမာသန်စွန်းပြီးပိုးသားကဲ့သို့နူးညံ့ပျော့ပျောင်းတဲ့ဆံကေသာလေးကိုပြန်လည်ရယူလိုက်ပါ
+              </p>
+              <div class="text-center">
+                <a href="#" class="btn btn-apple-theme">Shop Now</a>
+              </div>
+            </div>
+          </div>
+          <!-- Product 10 -->
+          <div class="col-lg-3 col-md-6 col-sm-12">
+            <div class="product-card border-0 shadow-sm">
+              <img
+                src="images/Karseell-Collagen-Hair-mask-Argan-Oil-Set-2.jpg"
+                class="rounded mb-4"
+                alt="Karseell Repair Set"
+              />
+              <h5 class="fw-bold">Karseell Repair Set</h5>
+              <!-- <p class="text-muted mt-2">$259.99</p> -->
+              <p class="text-muted text-justify p-3" style="font-size: 0.9rem; overflow: hidden;">
+                Essence oil 50ml နဲ့ keratin hair treatment500mlဗူးတို့ပါဝင်တဲ့ပျက်စီးခြောက်သွေ့နေတဲ့ဆံသားများအတွက်ထုတ်လုပ်ထားတဲ့repair set boxလေးသုံးပြီးကျန်းမာသန်စွန်းတဲ့ဆံကေသာလေးကိုပြန်လည်ရယူလိုက်ပါ
+              </p>
+              <div class="text-center">
+                <a href="#" class="btn btn-apple-theme">Shop Now</a>
+              </div>
+            </div>
+          </div>
+          <!-- Product 11 -->
+          <div class="col-lg-3 col-md-6 col-sm-12">
+            <div class="product-card border-0 shadow-sm">
+              <img
+                src="images/Karseell-Collagen-Hair-Treatment-Repair-Conditioning-Shampoo-and-Conditioner-Set-2.jpg"
+                class="rounded mb-4"
+                alt="Karseell Shampoo & Conditioner Hair Care Set"
+              />
+              <h5 class="fw-bold">Karseell Shampoo & Conditioner Hair Care Set</h5>
+              <!-- <p class="text-muted mt-2">$199.99</p> -->
+              <p class="text-muted text-justify p-3" style="font-size: 0.9rem; overflow: hidden;">
+                Maca essence ပါဝင်တဲ့ ဦးရေပြားယားယံခြောက်သွေ့မှုမဖြစ်စေပဲဆံသားကိုပျော့ပြောင်းပီးရှုပ်ထွေးမှုပြသနာတွေကိုဖြေရှင်းပေးနိုင်တဲ့ Shampoo 500mlနဲ့conditioner 500ml နှစ်ဗူးပါဝင်တဲ့1set box
+              </p>
+              <div class="text-center">
+                <a href="#" class="btn btn-apple-theme">Shop Now</a>
+              </div>
+            </div>
+          </div>
+          <!-- Product 11 -->
+          <div class="col-lg-3 col-md-6 col-sm-12">
+            <div class="product-card border-0 shadow-sm">
+              <img
+                src="images/Karseell-Collagen-Hair-Treatment-Deep-Repair-Conditioning-Hair-mask-Shampoo-and-Argan-Oil-Set-for-Dry-Damaged-Hair-All-Hair-Types-1.jpg"
+                class="rounded mb-4"
+                alt="Karseell Shampoo / Hair Essence/ Collagen Treatment"
+              />
+              <h5 class="fw-bold">Karseell Shampoo / Hair Essence/ Collagen Treatment</h5>
+              <!-- <p class="text-muted mt-2">$199.99</p> -->
+              <p class="text-muted text-justify p-3" style="font-size: 0.9rem; overflow: hidden;">
+                Maca essence ပါဝင်တဲ့ ဦးရေပြားယားယံခြောက်သွေ့မှုမဖြစ်စေပဲဆံသားကိုပျော့ပြောင်းပီးရှုပ်ထွေးမှုပြသနာတွေကိုဖြေရှင်းပေးနိုင်တဲ့ Shampoo 500mlနဲ့conditioner 500ml နှစ်ဗူးပါဝင်တဲ့1set box
+              </p>
+              <div class="text-center">
+                <a href="#" class="btn btn-apple-theme">Shop Now</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Enhanced Carousel Section -->
+      <section class="carousel-section my-5 text-center">
+        <div class="text-center py-3">
+          <h1 class="fw-bold text-uppercase mb-2" style="font-size: 2rem">
+            Shop by Hair Concern
+          </h1>
+          <p class="text-muted " style="font-size: 1.25rem">
+            Discover Karseell’s expertly crafted range, designed to meet the
+            unique needs of every hair type and concern with precision and care.
+          </p>
+        </div>
+
+        <div
+          id="carouselExample"
+          class="carousel slide"
+          data-bs-ride="carousel"
+        >
+          <!-- Carousel Indicators -->
+          <div class="carousel-indicators">
+            <button
+              type="button"
+              data-bs-target="#carouselExample"
+              data-bs-slide-to="0"
+              class="active"
+              aria-current="true"
+              aria-label="Slide 1"
+            ></button>
+            <button
+              type="button"
+              data-bs-target="#carouselExample"
+              data-bs-slide-to="1"
+              aria-label="Slide 2"
+            ></button>
+          </div>
+
+          <div class="carousel-inner">
+            <!-- Slide 1 -->
+            <div class="carousel-item active">
+              <div class="d-flex justify-content-center gap-3">
+                <div class="position-relative">
+                  <img
+                    src="images/karseell-haircare-models1-13.jpg"
+                    class="rounded shadow-lg"
+                    alt="Product Model 1"
+                  />
+                  <div
+                    class="position-absolute bottom-0 start-0 p-3 w-100 bg-dark bg-opacity-50 text-white"
+                  >
+                    <h6>Model 1: Smooth Finish</h6>
+                  </div>
+                </div>
+                <div class="position-relative">
+                  <img
+                    src="images/karseell-haircare-models1-14.jpg"
+                    class="rounded shadow-lg"
+                    alt="Product Model 2"
+                  />
+                  <div
+                    class="position-absolute bottom-0 start-0 p-3 w-100 bg-dark bg-opacity-50 text-white"
+                  >
+                    <h6>Model 2: Nourishing Formula</h6>
+                  </div>
+                </div>
+                <div class="position-relative">
+                  <img
+                    src="images/karseell-haircare-models1-15.jpg"
+                    class="rounded shadow-lg"
+                    alt="Product Model 3"
+                  />
+                  <div
+                    class="position-absolute bottom-0 start-0 p-3 w-100 bg-dark bg-opacity-50 text-white"
+                  >
+                    <h6>Model 3: Daily Repair</h6>
+                  </div>
+                </div>
+                <div class="position-relative">
+                  <img
+                    src="images/karseell-haircare-models1-16-1.jpg"
+                    class="rounded shadow-lg"
+                    alt="Product Model 4"
+                  />
+                  <div
+                    class="position-absolute bottom-0 start-0 p-3 w-100 bg-dark bg-opacity-50 text-white"
+                  >
+                    <h6>Model 4: Frizz Control</h6>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Slide 2 -->
+            <div class="carousel-item">
+              <div class="d-flex justify-content-center gap-3">
+                <div class="position-relative">
+                  <img
+                    src="images/karseell-haircare-models1-18.jpg"
+                    class="rounded shadow-lg"
+                    alt="Product Model 5"
+                  />
+                  <div
+                    class="position-absolute bottom-0 start-0 p-3 w-100 bg-dark bg-opacity-50 text-white"
+                  >
+                    <h6>Model 5: Volume Boost</h6>
+                  </div>
+                </div>
+                <div class="position-relative">
+                  <img
+                    src="images/karseell-haircare-models1-21.jpg"
+                    class="rounded shadow-lg"
+                    alt="Product Model 6"
+                  />
+                  <div
+                    class="position-absolute bottom-0 start-0 p-3 w-100 bg-dark bg-opacity-50 text-white"
+                  >
+                    <h6>Model 6: Hydration Lock</h6>
+                  </div>
+                </div>
+                <div class="position-relative">
+                  <img
+                    src="images/karseell-haircare-models1-22.jpg"
+                    class="rounded shadow-lg"
+                    alt="Product Model 7"
+                  />
+                  <div
+                    class="position-absolute bottom-0 start-0 p-3 w-100 bg-dark bg-opacity-50 text-white"
+                  >
+                    <h6>Model 7: Shine Enhancer</h6>
+                  </div>
+                </div>
+                <div class="position-relative">
+                  <img
+                    src="images/karseell-haircare-models1-23.jpg"
+                    class="rounded shadow-lg"
+                    alt="Product Model 8"
+                  />
+                  <div
+                    class="position-absolute bottom-0 start-0 p-3 w-100 bg-dark bg-opacity-50 text-white"
+                  >
+                    <h6>Model 8: Deep Conditioning</h6>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Carousel Controls -->
+          <button
+            class="carousel-control-prev"
+            type="button"
+            data-bs-target="#carouselExample"
+            data-bs-slide="prev"
+          >
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button
+            class="carousel-control-next"
+            type="button"
+            data-bs-target="#carouselExample"
+            data-bs-slide="next"
+          >
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
+        </div>
+      </section>
+
+      <section>
+        <div
+          class="row align-items-center"
+          style="
+            background-image: url('images/bg.PNG');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+          "
+        >
+          <!-- Text Section -->
+          <div
+            class="col-md-4 text-md-start text-center"
+            style="padding-left: 50px"
+          >
+            <h2
+              style="
+                font-weight: bold;
+                text-transform: uppercase;
+                margin-bottom: 20px;
+                color: #000;
+                letter-spacing: 1px;
+              "
+            >
+              Discover Karseell
+            </h2>
+            <p
+              style="
+                font-size: 1rem;
+                line-height: 1.6;
+                margin-bottom: 15px;
+                color: #444;
+              "
+            >
+              Karseell—a brand dedicated to sculpting a more beautiful you.
+              Here, you will discover high-quality hair care products and
+              experience our unique understanding and pursuit of beauty. We
+              believe everyone has the right to showcase their unique beauty,
+              and our products and services are designed to help you realize
+              this aspiration.
+            </p>
+            <p style="font-size: 1rem; line-height: 1.6; color: #444">
+              Our product range is diverse, and whether you have any type of
+              hair or skin, you can find products suitable for you here. Our
+              products are rigorously tested, contain natural ingredients, and
+              are gentle and non-irritating, allowing you to enjoy beauty while
+              also experiencing the care of nature.
+            </p>
+          </div>
+
+          <!-- Image Section -->
+          <div class="col-md-8 text-center">
+            <img src="images/KARSEELL-BANNER11.png" alt="Karseell Models" />
+          </div>
+        </div>
+      </section>
+
+      <section style="padding: 20px 0; background-color: #fff;">
+        <div class="container text-center">
+          <div class="row justify-content-center">
+            <!-- Item 1 -->
+            <div class="col-6 col-md-3">
+              <div>
+                <i class="bi bi-truck" style="font-size: 2rem; color: black;"></i>
+              </div>
+              <p style="margin-top: 10px; font-size: 1rem; font-weight: bold;">Worldwide delivery</p>
+            </div>
+            <!-- Item 2 -->
+            <div class="col-6 col-md-3">
+              <div>
+                <i class="bi bi-emoji-smile" style="font-size: 2rem; color: black;"></i>
+              </div>
+              <p style="margin-top: 10px; font-size: 1rem; font-weight: bold;">Satisfaction guaranteed</p>
+            </div>
+            <!-- Item 3 -->
+            <div class="col-6 col-md-3">
+              <div>
+                <i class="bi bi-headset" style="font-size: 2rem; color: black;"></i>
+              </div>
+              <p style="margin-top: 10px; font-size: 1rem; font-weight: bold;">After-sales support</p>
+            </div>
+            <!-- Item 4 -->
+            <div class="col-6 col-md-3">
+              <div>
+                <i class="bi bi-shield-check" style="font-size: 2rem; color: black;"></i>
+              </div>
+              <p style="margin-top: 10px; font-size: 1rem; font-weight: bold;">Payment Security</p>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      
+
+      <section style="position: relative; height: 30vh; background-image: url('images/karseell-wave-1-1.gif'); background-size: cover; background-position: center; background-attachment: fixed;">
+        <!-- Centered Content -->
+        <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center;">
+          <img src="images/LOGOWIHTE.png" alt="Karseell Logo" style="max-width: 250px; width: 100%; height: auto;">
+          <p style="color: white; font-size: 1.25rem; margin-top: 10px;">Maca Care System</p>
+        </div>
+      </section>
+      
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-light text-dark pt-5">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-3 mb-4">
+            <img
+              src="images/cropped-logo-1.png"
+              alt="E-Shop Logo"
+              style="height: 50px"
+            />
+            <p class="mt-3 text-muted">
+              Explore the best products to enrich your lifestyle with
+              cutting-edge design and functionality.
+            </p>
+          </div>
+          <div class="col-md-3 mb-4">
+            <h5 class="fw-bold">Quick Links</h5>
+            <ul class="list-unstyled">
+              <li>
+                <a href="#" class="text-dark text-decoration-none">About Us</a>
+              </li>
+              <li>
+                <a href="#" class="text-dark text-decoration-none">Shop</a>
+              </li>
+              <li>
+                <a href="#" class="text-dark text-decoration-none">Contact</a>
+              </li>
+              <li>
+                <a href="#" class="text-dark text-decoration-none">FAQs</a>
+              </li>
+            </ul>
+          </div>
+          <div class="col-md-3 mb-4">
+            <h5 class="fw-bold">Customer Service</h5>
+            <ul class="list-unstyled">
+              <li>
+                <a href="#" class="text-dark text-decoration-none"
+                  >Shipping Policy</a
+                >
+              </li>
+              <li>
+                <a href="#" class="text-dark text-decoration-none"
+                  >Return Policy</a
+                >
+              </li>
+              <li>
+                <a href="#" class="text-dark text-decoration-none"
+                  >Privacy Policy</a
+                >
+              </li>
+              <li>
+                <a href="#" class="text-dark text-decoration-none"
+                  >Terms & Conditions</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div class="col-md-3 mb-4 text-center">
+            <h5 class="fw-bold">Follow Us</h5>
+            <p class="text-muted">Stay connected via social media:</p>
+            <div class="d-flex justify-content-center gap-3">
+              <!--
+            <a href="#" class="text-dark me-3"><i class="bi bi-facebook"></i></a>
+            <a href="#" class="text-dark me-3"><i class="bi bi-twitter"></i></a>
+            <a href="#" class="text-dark me-3"><i class="bi bi-instagram"></i></a>
+            <a href="#" class="text-dark me-3"><i class="bi bi-linkedin"></i></a>-->
+              <a href="#" class="text-muted"
+                ><i class="bi bi-facebook fs-4"></i
+              ></a>
+              <a href="#" class="text-muted"
+                ><i class="bi bi-instagram fs-4"></i
+              ></a>
+              <a href="#" class="text-muted"
+                ><i class="bi bi-twitter fs-4"></i
+              ></a>
+              <a href="#" class="text-muted"
+                ><i class="bi bi-youtube fs-4"></i
+              ></a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <hr />
+      <p class="text-center text-muted mb-0">
+        © 2024 Karseell Myanmar. All rights reserved.
+      </p>
+    </footer>
+
+    <script src="bootstrap/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
