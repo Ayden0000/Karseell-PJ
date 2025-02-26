@@ -113,68 +113,55 @@
   </head>
 
   <body>
-    <header class="fixed-top py-3 px-4 shadow bg-white">
-      <div
-        class="container-fluid d-flex justify-content-between align-items-center"
-      >
-        <!-- Logo and Brand Name -->
-        <div class="d-flex align-items-center">
-          <img
-            src="images/cropped-logo-1.png"
-            alt="E-Shop Logo"
-            style="height: 50px; margin-right: 10px"
-          />
-          <h1 class="brand-name">
-            Karseell Myanmar
-        </h1>
-          <span class="fs-4 fw-bold text-dark"></span>
-        </div>
-        <!-- Navigation -->
-        <nav class="d-flex align-items-center">
-          <a
-            href="index.html"
-            class="me-4 text-dark fw-medium text-decoration-none link-hover"
-            >Home</a
-          >
-          <a
-            href="#"
-            class="me-4 text-dark fw-medium text-decoration-none link-hover"
-            >Shop</a
-          >
-
-          <!-- Dropdown Menu -->
-          <div class="dropdown position-relative">
-            <a
-              href="#"
-              class="text-dark fw-medium text-decoration-none link-hover"
-            >
-              Products
-              <i class="bi bi-chevron-down ms-1"></i>
-              <!-- Dropdown indicator -->
-            </a>
-            <ul
-              class="dropdown-menu shadow-lg border-0 rounded-3 position-absolute"
-              aria-labelledby="productsDropdown"
-            >
-              <li><a class="dropdown-item text-dark" href="#">Hair Mask</a></li>
-              <li>
-                <a class="dropdown-item text-dark" href="#">Conditioner</a>
+    <header class="fixed-top py-3 px-4 shadow bg-white col-sm-12">
+      <nav class="navbar navbar-expand-md navbar-light bg-white">
+        <div class="container-fluid"> 
+          <!-- Logo and Brand Name -->
+          <a class="navbar-brand d-flex align-items-center" href="index.html"> 
+            <img
+              src="images/cropped-logo-1.png"
+              alt="E-Shop Logo"
+              style="height: 50px; margin-right: 10px"
+            />
+            <h1 class="brand-name">
+              Karseell Myanmar
+          </h1>
+            <span class="fs-4 fw-bold text-dark"></span>
+          </a>
+    
+          <!-- Navbar Toggler (for mobile menu button) -->
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+    
+          <!-- Navigation Links - Collapsible part -->
+          <div class="collapse navbar-collapse justify-content-end" id="navbarNav"> 
+            <ul class="navbar-nav ms-auto"> 
+              <li class="nav-item">
+                <a class="nav-link link-hover" href="index.html">Home</a> 
               </li>
-              <li><a class="dropdown-item text-dark" href="#">Shampoo</a></li>
-              <li><a class="dropdown-item text-dark" href="#">Hair Oil</a></li>
-              <li>
-                <a class="dropdown-item text-dark" href="#">Hair Care Set</a>
+              <li class="nav-item">
+                <a class="nav-link link-hover" href="#">Shop</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle link-hover" href="#" id="productsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Products
+                </a>
+                <ul class="dropdown-menu shadow-lg border-0 rounded-3 position-absolute" aria-labelledby="productsDropdown">
+                  <li><a class="dropdown-item text-dark" href="#">Hair Mask</a></li>
+                  <li><a class="dropdown-item text-dark" href="#">Conditioner</a></li>
+                  <li><a class="dropdown-item text-dark" href="#">Shampoo</a></li>
+                  <li><a class="dropdown-item text-dark" href="#">Hair Oil</a></li>
+                  <li><a class="dropdown-item text-dark" href="#">Hair Care Set</a></li>
+                </ul>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link link-hover" href="contact.html">Contact</a>
               </li>
             </ul>
           </div>
-
-          <a
-            href="#"
-            class="ms-4 text-dark fw-medium text-decoration-none link-hover"
-            >Contact</a
-          >
-        </nav>
-      </div>
+        </div>
+      </nav>
     </header>
 
     <main class="mt-5">
@@ -447,29 +434,31 @@
           <div class="col-md-3 mb-4 text-center">
             <h5 class="fw-bold">Follow Us</h5>
             <p class="text-muted">Stay connected via social media:</p>
-            <div class="d-flex justify-content-center gap-3">
-              <!--
-            <a href="#" class="text-dark me-3"><i class="bi bi-facebook"></i></a>
-            <a href="#" class="text-dark me-3"><i class="bi bi-twitter"></i></a>
-            <a href="#" class="text-dark me-3"><i class="bi bi-instagram"></i></a>
-            <a href="#" class="text-dark me-3"><i class="bi bi-linkedin"></i></a>-->
-              <a href="https://www.facebook.com/share/VdR1BPdx91yoW8ep/?mibextid=LQQJ4d" class="text-muted"
+            <div class="row d-flex justify-content-center gap-3">
+              <a href="https://www.facebook.com/share/VdR1BPdx91yoW8ep/?mibextid=LQQJ4d" class="text-muted col-2"
                 ><i class="bi bi-facebook fs-4"></i
               ></a>
-              <a href="#" class="text-muted"
+              <a href="#" class="text-muted col-2"
                 ><i class="bi bi-instagram fs-4"></i
               ></a>
-              <a href="#" class="text-muted"
+              <a href="https://www.tiktok.com/@shweburma.pinyin45?_t=ZS-8uCm7FED6yG&_r=1" class="text-muted  col-2"
+                ><i class="bi bi-tiktok fs-4"></i
+              ></a>
+              <a href="https://t.me/shwebamrpinyin" class="text-muted  col-2"
+                ><i class="bi bi-telegram fs-4"></i
+              ></a>
+              <a href="https://maps.app.goo.gl/VLMLgp6KvfNqq8Bb9" class="text-muted  col-2"
+              ><i class="bi bi-map fs-4"></i
+            ></a>
+              <a href="#" class="text-muted col-2"
                 ><i class="bi bi-twitter fs-4"></i
               ></a>
-              <a href="#" class="text-muted"
+              <a href="#" class="text-muted col-2"
                 ><i class="bi bi-youtube fs-4"></i
               ></a>
-              <a href="https://maps.app.goo.gl/VLMLgp6KvfNqq8Bb9" class="text-muted"
-                ><i class="bi bi-map fs-4"></i
-              ></a><a href="tel:+959765049100" class="text-muted"
-              ><i class="bi bi-telephone-fill fs-4"></i
-            ></a>
+              <a href="#" class="text-muted col-2"
+                ><i class="bi bi-chat-left-dots-fill fs-4"></i
+              ></a>
             </div>
           </div>
         </div>
