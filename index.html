@@ -14,9 +14,9 @@
 
       /* General Header Styling */
       header {
-        background-color: #ffffff; /* Clean, minimalist white */
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Smooth shadow for depth */
-        transition: all 0.3s ease-in-out; /* Animation for smooth interactions */
+        background-color: #ffffff;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease-in-out;
         z-index: 1000;
       }
 
@@ -28,10 +28,10 @@
         letter-spacing: 0.5px;
       }
       header .brand-name {
-        font-size: 2rem; /* Larger font size for brand name */
+        font-size: 2rem;
         font-weight: 600;
         color: #404040;
-        font-family: 'Helvetica', 'Arial', sans-serif;
+        font-family: 'Helvetica', sans-serif;
         margin: 0;
       }
       /* Navigation Links */
@@ -84,7 +84,7 @@
       .dropdown:hover .bi-chevron-down {
         transform: rotate(180deg); /* Rotate the caret */
       }
-      
+
       /* Dropdown Menu Animations */
       @keyframes fadeIn {
         from {
@@ -96,11 +96,21 @@
           transform: translateY(0);
         }
       }
+
+      /* Mobile-Friendly Responsiveness */
+      @media (max-width: 768px) {
+        header .navbar-brand img {
+          max-height: 50px; /* Smaller logo on smaller screens */
+        }
+        header .brand-name {
+          display: none;
+        }
+      }
       .main-product {
         position: relative;
         color: #fff;
-        height: 600px;
         overflow: hidden;
+        min-height: 400px; /* Example min-height for responsiveness */
       }
 
       .main-product img {
@@ -127,9 +137,16 @@
         left: 5%;
       }
 
+      @media (max-width: 768px) {
+        .main-product .product-text {
+          left: 2%;
+          max-width: 90%;
+          text-align: center;
+        }
+      }
+
       .product-card {
         text-align: center;
-        /*padding: 10px;*/
         border: 0.5px solid #ddd;
         border-radius: 20px;
         background-color: #fff;
@@ -137,9 +154,9 @@
 
       .product-card img {
         width: 100%;
-        height: z;
-        border-radius: 8px;
+        aspect-ratio: 1/1; /* Example: Square aspect ratio for images */
         object-fit: cover;
+        border-radius: 8px;
       }
 
       .product-card h5 {
@@ -147,75 +164,72 @@
       }
       .product-card p {
         max-height: 150px;
+        overflow: hidden;
       }
       .product-card .btn {
-        margin-top: 10px;
-        margin-bottom: 20px;
+        margin: 10px 0 20px 0;
       }
 
       footer {
         background-color: #f8f9fa;
         text-align: center;
         padding: 20px;
-        /**margin-top: 20px;*/
       }
 
       .carousel-section {
-        width: 96%; /* or you can set a specific max-width for better control */
-        margin: 0 auto; /* This centers the section horizontally */
-        padding: 0;
-        margin-top: 0;
-        margin-bottom: 0;
+        width: 96%;
+        margin: 0 auto;
+        padding: 20px 0;
       }
 
       .carousel-section h2 {
-        padding: 20px 0; /* Add spacing around the heading */
+        margin-bottom: 1rem;
       }
 
       .carousel.slide {
-        width: 100%; /* Set the carousel to occupy full width */
+        width: 100%;
       }
 
       .carousel-item img {
-        width: 460px;
-        height: 560px;
-        object-fit: cover; /* Ensure the images maintain aspect ratio and cover the area */
+        width: 100%;
+        height: auto;
+        object-fit: cover;
       }
 
       .container {
         max-width: 97%;
       }
-      
 
       .products-row {
-        padding-top: 25px !important;
+        padding-top: 25px;
       }
 
       .btn-apple-theme {
         display: inline-block;
-        background-color: #1c1c1e; /* Dark, elegant background */
-        color: #f5f5f7; /* Light text, similar to Apple's design */
+        background-color: #1c1c1e;
+        color: #f5f5f7;
         font-size: 1rem;
         font-weight: 500;
-        text-transform: uppercase; /* Consistent with Apple's design language */
-        padding: 0.6rem 1.5rem; /* Slightly more padding for elegance */
-        border: none; /* No border for minimalism */
-        border-radius: 8px; /* Soft rounded corners */
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
-        transition: all 0.3s ease-in-out; /* Smooth hover transitions */
-        text-decoration: none; /* Remove underline for links */
+        text-transform: uppercase;
+        padding: 0.6rem 1.5rem;
+        border: none;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease-in-out;
+        text-decoration: none;
       }
 
-      .btn-apple-theme:hover {
-        background-color: #333336; /* Slightly lighter background on hover */
-        color: #ffffff; /* Slight color change for text */
-        transform: translateY(-2px); /* Lift effect */
-        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Enhanced shadow on hover */
+      .btn-apple-theme:hover,
+      .btn-apple-theme:focus {
+        background-color: #333336;
+        color: #ffffff;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
       }
 
       .btn-apple-theme:active {
-        transform: translateY(0); /* Reset lift effect when clicked */
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Return to original shadow */
+        transform: translateY(0);
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
       }
     </style>
   </head>
@@ -277,7 +291,7 @@
       <!-- Main Product Section -->
       <section class="main-product">
         <img src="images/collagen-banner.jpg" alt="Main Product" />
-        <div class="container">
+        <div class="container ms-auto mb-5">
           <div class="row"> 
             <div class="col-md-6"> 
               <div class="product-text my-5">

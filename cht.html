@@ -29,7 +29,7 @@
         font-size: 2rem; /* Larger font size for brand name */
         font-weight: 600;
         color: #404040;
-        font-family: 'Helvetica', 'Arial', sans-serif;
+        font-family: 'Helvetica', sans-serif;
         margin: 0;
       }
       /* Navigation Links */
@@ -97,13 +97,11 @@
 
       /* Mobile-Friendly Responsiveness */
       @media (max-width: 768px) {
-        header nav {
-          flex-direction: column; /* Stack navigation links on smaller screens */
-          gap: 10px;
+        header .navbar-brand img {
+          max-height: 50px; /* Smaller logo on smaller screens */
         }
-
-        header nav a {
-          font-size: 0.9rem; /* Adjust font size for smaller devices */
+        header .brand-name {
+          display: none;
         }
       }
       footer {
@@ -148,7 +146,7 @@
         margin-top: 20px;
       }
       .product-image {
-        width: 67%;
+        max-width: 100%;
         height: auto;
         display: block;
         margin: 0 auto;

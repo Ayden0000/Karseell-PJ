@@ -7,11 +7,16 @@
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" />
     <link href="bootstrap/css/bootstrap-icons.min.css" rel="stylesheet" />
     <style>
+      body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+      }
+
       /* General Header Styling */
       header {
-        background-color: #ffffff; /* Clean, minimalist white */
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Smooth shadow for depth */
-        transition: all 0.3s ease-in-out; /* Animation for smooth interactions */
+        background-color: #ffffff;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease-in-out;
         z-index: 1000;
       }
 
@@ -94,13 +99,11 @@
 
       /* Mobile-Friendly Responsiveness */
       @media (max-width: 768px) {
-        header nav {
-          flex-direction: column; /* Stack navigation links on smaller screens */
-          gap: 10px;
+        header .navbar-brand img {
+          max-height: 50px; /* Smaller logo on smaller screens */
         }
-
-        header nav a {
-          font-size: 0.9rem; /* Adjust font size for smaller devices */
+        header .brand-name {
+          display: none;
         }
       }
       footer {
